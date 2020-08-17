@@ -1,10 +1,10 @@
 package com.cnetra.subscriptions.accounts;
 
-import com.cnetra.subscriptions.accounts.repository.Account;
-import com.cnetra.subscriptions.accounts.repository.AccountsRepository;
+import com.cnetra.subscriptions.accounts.model.Account;
+import com.cnetra.subscriptions.accounts.repository.AccountEntity;
+import com.cnetra.subscriptions.accounts.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,18 +12,33 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AccountsServiceImpl implements AccountsService {
 
-    private final AccountsRepository accountsRepository;
+    private final AccountRepository accountRepository;
 
     /**
      * (@inheritDoc)
-     * @param accountType
-     * @param account
+     * @param accountEntity
      * @return
      */
 
-    public Account createAccount(final String accountType, final Account account) {
-        log.info("Creating Account : {}",accountType);
-
-        return accountsRepository.save(account);
+    public AccountEntity createAccount(final AccountEntity accountEntity) {
+        log.info("Creating Account : {}", accountEntity);
+        return accountRepository.save(accountEntity);
     }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Account findAccountById(final String id){
+        log.info("Fetch account for : {}", id);
+        final AccountEntity accountEntity = accountRepository.findById(Integer.parseInt(id));
+
+        return Account.builder()
+                .accountId(accountEntity.getAccountId())
+                .id(accountEntity.getId())
+                .companyName(accountEntity.getCompanyName())
+                .build();
+    }
+
 }

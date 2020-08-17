@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AccountsRepository extends CrudRepository<Account, Integer> {
-    List<Account> findByCompanyName(String companyName);
-    Account findById(int id);
+public interface AccountRepository extends CrudRepository<AccountEntity, Integer> {
+    List<AccountEntity> findByCompanyName(String companyName);
+    AccountEntity findById(int id);
 }

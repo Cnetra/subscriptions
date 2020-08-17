@@ -2,12 +2,10 @@ package com.cnetra.subscriptions.accounts.repository;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Map;
+import java.util.HashMap;
 
 @Entity
 @Getter
@@ -16,7 +14,9 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account implements Serializable {
+public class AccountEntity implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private Integer id;
 
@@ -75,5 +75,5 @@ public class Account implements Serializable {
     private Date modifyDate;
 
     @Column(name="extended")
-    private Map<String, Object> extended;
+    private HashMap<String, Object> extended;
 }
