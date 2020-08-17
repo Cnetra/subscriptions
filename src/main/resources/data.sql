@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS accounts (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	tenant_id VARCHAR (255),
+	account_id VARCHAR(255),
+	parent_account_id VARCHAR(255),
+	type VARCHAR(255),
+	associated_vendor_id VARCHAR (255),
+	company_name VARCHAR(255),
+	phone VARCHAR(255),
+	email VARCHAR(255),
+	fax VARCHAR(255),
+	website_url VARCHAR(255),
+	duns_number VARCHAR(255),
+	industry_type VARCHAR(255),
+	annual_revenue VARCHAR(255),
+	number_of_employees INTEGER,
+	created_by VARCHAR(255),
+	modified_by VARCHAR(255),
+	creation_date DATETIME,
+	modify_date DATETIME,
+	extended JSON
+);
