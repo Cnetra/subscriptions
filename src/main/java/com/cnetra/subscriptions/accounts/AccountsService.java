@@ -2,6 +2,8 @@ package com.cnetra.subscriptions.accounts;
 
 import com.cnetra.subscriptions.accounts.model.Account;
 import com.cnetra.subscriptions.accounts.repository.AccountEntity;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface AccountsService {
     /**
@@ -9,8 +11,10 @@ public interface AccountsService {
      * @param accountEntity
      * @return Account
      */
-    AccountEntity createAccount(AccountEntity accountEntity);
+    Mono<AccountEntity> createAccount(AccountEntity accountEntity);
 
-    Account findAccountById(String id);
+    Mono<AccountEntity> findAccountById(String id);
+
+    Flux<AccountEntity> findAll();
 
 }
