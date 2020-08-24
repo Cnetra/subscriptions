@@ -25,12 +25,12 @@ public class AccountsController {
     }
 
     @PostMapping("/account")
-    Mono<ServerResponse> create(@RequestBody AccountEntity accountEntity) {
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(fromValue(accountsService.createAccount(accountEntity)));
+    Mono<AccountEntity> create(@RequestBody AccountEntity accountEntity) {
+        return accountsService.createAccount(accountEntity);
     }
 
     @GetMapping("/all")
-    Flux<AccountEntity> finalAll() {
+    Flux<AccountEntity> findAll() {
         return accountsService.findAll();
     }
 
