@@ -12,7 +12,7 @@
 	<artifactId>subscriptions</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>subscriptions</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Cnetra Subscriptions</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -27,10 +27,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
-
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -47,11 +51,6 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

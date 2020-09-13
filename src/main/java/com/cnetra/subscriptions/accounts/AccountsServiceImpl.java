@@ -13,17 +13,15 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class AccountsServiceImpl implements AccountsService {
-
-    @Autowired
-    private TransactionTemplate transactionTemplate;
-
-    @Autowired
-    @Qualifier("jdbcScheduler")
-    private Scheduler jdbcScheduler;
 
     @Autowired
     private final AccountRepository accountRepository;
@@ -34,11 +32,13 @@ public class AccountsServiceImpl implements AccountsService {
      * @return
      */
 
-    public Mono<AccountEntity> createAccount(final AccountEntity accountEntity) {
+    public AccountEntity createAccount(final AccountEntity accountEntity) {
         log.info("Creating Account : {}", accountEntity);
-        return Mono.fromCallable(() -> transactionTemplate.execute(status -> {
-            return accountRepository.save(accountEntity);
-        })).subscribeOn(jdbcScheduler);
+        return accountRepository.save(accountEntity);
+
+//        return Mono.fromCallable(() -> transactionTemplate.execute(status -> {
+//            return accountRepository.save(accountEntity);
+//        })).subscribeOn(jdbcScheduler);
     }
 
     /**
@@ -46,23 +46,24 @@ public class AccountsServiceImpl implements AccountsService {
      * @param id String
      * @return
      */
-    public Mono<AccountEntity> findAccountById(final String id){
+    public AccountEntity findAccountById(final String id){
         log.info("Fetch account for : {}", id);
-
-        Mono<AccountEntity> accountEntityMono = Mono
-                .defer(() -> Mono.just(accountRepository.findById(Integer.parseInt((id)))))
-                .subscribeOn(jdbcScheduler);
-
-        return accountEntityMono;
+        return accountRepository.findById(Integer.parseInt(id));
+//        Mono<AccountEntity> accountEntityMono = Mono
+//                .defer(() -> Mono.just(accountRepository.findById(Integer.parseInt((id)))))
+//                .subscribeOn(jdbcScheduler);
+//
+//        return accountEntityMono;
     }
 
     /**
      *
      * @return list of accounts
      */
-    public Flux<AccountEntity> findAll(){
-        Flux<AccountEntity> defer = Flux.defer(() -> Flux.fromIterable(accountRepository.findAll()));
-        return defer.subscribeOn(jdbcScheduler);
+    public Iterable<AccountEntity> findAll(){
+        return accountRepository.findAll();
+//        Flux<AccountEntity> defer = Flux.defer(() -> Flux.fromIterable(accountRepository.findAll()));
+//        return defer.subscribeOn(jdbcScheduler);
     }
 
 }

@@ -1,0 +1,18 @@
+// Terminal commands, pwd: abc123
+cd /usr/local/mysql/bin ./mysql -u root -p
+
+// MYSQL Commands
+// ref https://dev.mysql.com/doc/mysql-getting-started/en/
+// Create database
+create database cnetra;
+
+//change database
+use cnetra
+show tables;
+
+// create user
+CREATE USER 'cnetra'
+  IDENTIFIED BY 'cnetra';
+GRANT ALL
+  ON cnetra.*
+  TO 'cnetra';
